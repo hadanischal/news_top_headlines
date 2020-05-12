@@ -23,38 +23,53 @@ class _NewsListViewState extends State<NewsListView> {
   Widget build(BuildContext context) {
     final vm = Provider.of<NewsArticleListViewModel>(context);
 
-    var searchIcon = Icon(Icons.search);
+    return Scaffold(
+        appBar: AppBar(title: Text("Top News")),
+        body: Column(children: <Widget>[
+          _buildSearchTextField(vm),
+          _buildNewsList(context,vm),
+        ]));
+  }
 
-    var sarchTextField = TextField(
+  Widget _buildNewsList(BuildContext context, NewsArticleListViewModel vm) {
+    switch (vm.loadingStatus) {
+      case LoadingStatus.completed:
+        return Expanded(
+          child: NewsListWidget(
+            articles: vm.articles,
+            onSelected: (_) {},
+          ),
+        );
+      case LoadingStatus.searching:
+        return Align(child: CircularProgressIndicator());
+      case LoadingStatus.empty:
+        return Align(
+          child: Text("No result found"),
+        );
+    }
+     return Container();
+  }
+
+  TextField _buildSearchTextField(NewsArticleListViewModel vm) {
+    return TextField(
       controller: _controller,
-      onSubmitted: (_) {
-        // TODO: fetch all news
+      onSubmitted: (keyword) {
+        if (keyword.isNotEmpty) {
+          vm.search(keyword);
+        }
       },
       decoration: InputDecoration(
         labelText: "Search",
         icon: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: searchIcon,
+          child: Icon(Icons.search),
         ),
         suffixIcon: IconButton(
-          icon: Icon(Icons.clear), 
-          onPressed: () {
-            _controller.clear();
-          }
-          ),
+            icon: Icon(Icons.clear),
+            onPressed: () {
+              _controller.clear();
+            }),
       ),
     );
-
-    return Scaffold(
-        appBar: AppBar(title: Text("Top News")),
-        body: Column(children: <Widget>[
-          sarchTextField,
-          Expanded(
-            child: NewsListWidget(
-              articles: vm.articles,
-              onSelected: (_) {},
-            ),
-          )
-        ]));
   }
 }
