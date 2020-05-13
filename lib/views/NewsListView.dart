@@ -27,7 +27,7 @@ class _NewsListViewState extends State<NewsListView> {
         appBar: AppBar(title: Text("Top News")),
         body: Column(children: <Widget>[
           _buildSearchTextField(vm),
-          _buildNewsList(context,vm),
+          _buildNewsList(context, vm),
         ]));
   }
 
@@ -47,7 +47,7 @@ class _NewsListViewState extends State<NewsListView> {
           child: Text("No result found"),
         );
     }
-     return Container();
+    return Container();
   }
 
   TextField _buildSearchTextField(NewsArticleListViewModel vm) {
