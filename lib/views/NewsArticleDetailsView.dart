@@ -10,12 +10,11 @@ class NewsArticleDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("${this.article.title}")
-      ),
-      body: WebView(
-        initialUrl: this.article.url,
-      )
-    );
+        appBar: AppBar(title: Text("${this.article.title}")),
+        body: WebView(
+          initialUrl: this.article.url,
+          javascriptMode: JavascriptMode.unrestricted,
+        )
+        );
   }
 }

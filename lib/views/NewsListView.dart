@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_top_headlines/viewmodels/NewsArticleListViewModel.dart';
+import 'package:news_top_headlines/viewmodels/NewsArticleViewModel.dart';
 import 'package:news_top_headlines/widgets/NewsListWidget.dart';
 import 'package:provider/provider.dart';
+
+import 'NewsArticleDetailsView.dart';
 
 class NewsListView extends StatefulWidget {
   @override
@@ -37,7 +40,9 @@ class _NewsListViewState extends State<NewsListView> {
         return Expanded(
           child: NewsListWidget(
             articles: vm.articles,
-            onSelected: (_) {},
+            onSelected: (article) {
+              _showNewsArticleDetails(context, article);
+            },
           ),
         );
       case LoadingStatus.searching:
@@ -69,6 +74,18 @@ class _NewsListViewState extends State<NewsListView> {
             onPressed: () {
               _controller.clear();
             }),
+      ),
+    );
+  }
+
+  void _showNewsArticleDetails(
+      BuildContext context, NewsArticleViewModel article) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => NewsArticleDetailsView(
+          article: article,
+        ),
       ),
     );
   }

@@ -14,6 +14,7 @@ class NewsListWidget extends StatelessWidget {
       itemCount: articles.length,
       itemBuilder: (context, index) {
         final article = articles[index];
+
         var newsImage = article.imageURL != null
             ? Image.network(article.imageURL)
             : Image.asset("assets/news-placeholder.png");
@@ -22,7 +23,8 @@ class NewsListWidget extends StatelessWidget {
 
         return ListTile(
           onTap: () {
-            _showNewsArticleDetails(context, article);
+            this.onSelected(article);
+            // _showNewsArticleDetails(context, article);
           },
           leading: imageContainer,
           title: Text(article.title),
@@ -31,15 +33,15 @@ class NewsListWidget extends StatelessWidget {
     );
   }
 
-  void _showNewsArticleDetails(
-      BuildContext context, NewsArticleViewModel article) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => NewsArticleDetailsView(
-          article: article,
-        ),
-      ),
-    );
-  }
+  // void _showNewsArticleDetails(
+  //     BuildContext context, NewsArticleViewModel article) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (_) => NewsArticleDetailsView(
+  //         article: article,
+  //       ),
+  //     ),
+  //   );
+  // }
 }
