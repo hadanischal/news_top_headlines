@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:news_top_headlines/models/NewsArticleResult.dart';
-import 'package:news_top_headlines/services/Webservice.dart';
+import 'package:news_top_headlines/models/articles.dart';
+ import 'package:news_top_headlines/services/Webservice.dart';
 
 import 'NewsArticleViewModel.dart';
 

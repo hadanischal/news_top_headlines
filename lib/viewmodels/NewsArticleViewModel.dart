@@ -1,5 +1,6 @@
 
-import 'package:news_top_headlines/models/NewsArticleResult.dart';
+ 
+import 'package:news_top_headlines/models/articles.dart';
 
 class NewsArticleViewModel {
 

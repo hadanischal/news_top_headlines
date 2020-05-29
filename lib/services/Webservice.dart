@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:news_top_headlines/models/NewsArticleResult.dart';
+import 'package:news_top_headlines/models/articles.dart';
+import 'package:news_top_headlines/models/news_article_result.dart';
 import 'package:news_top_headlines/utils/Constants.dart';
 
 class Webservice {
