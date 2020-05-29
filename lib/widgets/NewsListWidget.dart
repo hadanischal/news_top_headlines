@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news_top_headlines/viewmodels/NewsArticleViewModel.dart';
-import 'package:news_top_headlines/views/NewsArticleDetailsView.dart';
 
 class NewsListWidget extends StatelessWidget {
   final List<NewsArticleViewModel> articles;
