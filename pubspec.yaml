@@ -37,6 +37,7 @@ dev_dependencies:
     sdk: flutter
   
   json_serializable: ^3.3.0 #for retrofit
+  build_runner: ^1.10.0
 
 
 
