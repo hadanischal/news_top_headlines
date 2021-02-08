@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:news_top_headlines/models/articles.dart';
- import 'package:news_top_headlines/services/Webservice.dart';
+import 'package:news_top_headlines/services/Webservice.dart';
 
 import 'NewsArticleViewModel.dart';
 
@@ -12,11 +12,8 @@ class NewsArticleListViewModel extends ChangeNotifier {
 
   Future<void> search(String keyword) async {
     _loadingStatusInitialStage();
-    List<Articles> newsArticles =
-        await Webservice().fetchHeadlinesByKeyword(keyword);
-    this.articles = newsArticles
-        .map((article) => NewsArticleViewModel(article: article))
-        .toList();
+    List<Articles> newsArticles = await Webservice().fetchHeadlinesByKeyword(keyword);
+    this.articles = newsArticles.map((article) => NewsArticleViewModel(article: article)).toList();
     _loadingStatusUpdate();
 
     notifyListeners();
@@ -25,9 +22,7 @@ class NewsArticleListViewModel extends ChangeNotifier {
   Future<void> populateTopHeadlines() async {
     _loadingStatusInitialStage();
     List<Articles> newsArticles = await Webservice().fetchtopHeadlines();
-    this.articles = newsArticles
-        .map((article) => NewsArticleViewModel(article: article))
-        .toList();
+    this.articles = newsArticles.map((article) => NewsArticleViewModel(article: article)).toList();
     _loadingStatusUpdate();
     notifyListeners();
   }
@@ -37,7 +32,6 @@ class NewsArticleListViewModel extends ChangeNotifier {
   }
 
   void _loadingStatusUpdate() {
-    this.loadingStatus =
-        this.articles.isEmpty ? LoadingStatus.empty : LoadingStatus.completed;
+    this.loadingStatus = this.articles.isEmpty ? LoadingStatus.empty : LoadingStatus.completed;
   }
 }

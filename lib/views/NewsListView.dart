@@ -18,8 +18,7 @@ class _NewsListViewState extends State<NewsListView> {
   void initState() {
     super.initState();
 
-    Provider.of<NewsArticleListViewModel>(context, listen: false)
-        .populateTopHeadlines();
+    Provider.of<NewsArticleListViewModel>(context, listen: false).populateTopHeadlines();
   }
 
   @override
@@ -56,6 +55,18 @@ class _NewsListViewState extends State<NewsListView> {
   }
 
   TextField _buildSearchTextField(NewsArticleListViewModel vm) {
+    var inputDecoration = InputDecoration(
+      labelText: "Search",
+      icon: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Icon(Icons.search),
+      ),
+      suffixIcon: IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            _controller.clear();
+          }),
+    );
     return TextField(
       controller: _controller,
       onSubmitted: (keyword) {
@@ -63,23 +74,11 @@ class _NewsListViewState extends State<NewsListView> {
           vm.search(keyword);
         }
       },
-      decoration: InputDecoration(
-        labelText: "Search",
-        icon: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Icon(Icons.search),
-        ),
-        suffixIcon: IconButton(
-            icon: Icon(Icons.clear),
-            onPressed: () {
-              _controller.clear();
-            }),
-      ),
+      decoration: inputDecoration,
     );
   }
 
-  void _showNewsArticleDetails(
-      BuildContext context, NewsArticleViewModel article) {
+  void _showNewsArticleDetails(BuildContext context, NewsArticleViewModel article) {
     Navigator.push(
       context,
       MaterialPageRoute(
